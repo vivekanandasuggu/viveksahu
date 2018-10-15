@@ -57,7 +57,7 @@ public class SelectionActivity extends AppCompatActivity {
         btn_submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent examIntent=new Intent(SelectionActivity.this,ExamActivity.class);
+                Intent examIntent=new Intent(SelectionActivity.this,LoginActivity.class);
                 startActivity(examIntent);
           /*    if(selectedClient!=null) {
                   sendSelectedClient();

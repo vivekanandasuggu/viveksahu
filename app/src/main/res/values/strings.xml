@@ -19,4 +19,8 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="previous"><![CDATA[<<Previous]]></string>
     <string name="next_btn"><![CDATA[Next>>]]></string>
+    <string name="forgot_password">Forgot password?</string>
+    <string name="sign_in_with_otp">Sign In With OTP</string>
+    <string name="sign_in">Sign In</string>
+    <string name="need_help">Need help?</string>
 </resources>

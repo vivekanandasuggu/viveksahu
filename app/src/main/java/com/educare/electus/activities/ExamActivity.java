@@ -71,12 +71,14 @@ public class ExamActivity extends AppCompatActivity {
             public void onPageSelected(int i) {
                 questionsModelArrayList.get(i).setViewed(true);
                 questionsRecyclerViewAdapter.notifyDataSetChanged();
-                Toast.makeText(ExamActivity.this, "Current Page" + i, Toast.LENGTH_SHORT).show();
+                Toast.makeText(ExamActivity.this, "Current Page" + i, Toast.LENGTH_SHORT).show();/*
                 if(i>5){
                     rv_questions.scrollToPosition(9);
                 }else{
                     rv_questions.scrollToPosition(0);
-                }
+                }*/
+                if(i<=6){
+                rv_questions.scrollToPosition(i+3);}
             }
 
             @Override
