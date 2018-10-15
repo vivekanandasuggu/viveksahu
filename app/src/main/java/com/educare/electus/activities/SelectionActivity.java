@@ -1,7 +1,6 @@
 package com.educare.electus.activities;
 
 import android.app.ProgressDialog;
-import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -10,23 +9,22 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
+import android.widget.Toast;
 
+import com.android.volley.NetworkResponse;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.educare.electus.R;
-import com.educare.electus.adapters.ClientsSpinnerAdapter;
 import com.educare.electus.model.ClientsList;
 import com.educare.electus.utilities.AppConstants;
 import com.educare.electus.utilities.AppServiceUrls;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -43,7 +41,7 @@ public class SelectionActivity extends AppCompatActivity {
     private ArrayAdapter<ClientsList> myAdapter;
     private ArrayAdapter<CharSequence> langAdapter;
     private String selectedClient;
-
+    int mStatusCode;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,8 +56,9 @@ public class SelectionActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Intent examIntent=new Intent(SelectionActivity.this,ExamActivity.class);
-                startActivity(examIntent);
+              /*  Intent examIntent=new Intent(SelectionActivity.this,ExamActivity.class);
+                startActivity(examIntent);*/
+              sendSelectedClient();
 
             }
         });
@@ -145,6 +144,45 @@ public class SelectionActivity extends AppCompatActivity {
     }
 
     private void sendSelectedClient(){
+        progressDialog.show();
+        final RequestQueue requestQueue = Volley.newRequestQueue(this);
+        // Initialize a new JsonObjectRequest instance
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
+                Request.Method.GET,
+                AppServiceUrls.GET_CLIENTS_SELECTION,
+                null,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
 
+                    Log.v("ElectusClinets","Electus"+response.toString());
+                        Log.e("ElectusClinets", "mStatusCode  " + mStatusCode);
+                        progressDialog.dismiss();
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        // Do something when error occurred
+                        Toast.makeText(SelectionActivity.this, ""+mStatusCode, Toast.LENGTH_SHORT).show();
+                        NetworkResponse networkResponse = error.networkResponse;
+                       /* if (networkResponse != null && networkResponse.statusCode) {
+                            // HTTP Status Code: 401 Unauthorized
+                        }*/
+                        Log.e("ElectusClinets", "Electus  " + error.getMessage());
+                        Log.e("ElectusClinets", "mStatusCode  " + mStatusCode);
+                        progressDialog.dismiss();
+                    }
+                }) {
+
+            @Override
+            protected Response<JSONObject> parseNetworkResponse(NetworkResponse response) {
+                 mStatusCode = response.statusCode;
+                return super.parseNetworkResponse(response);
+            }
+        };
+
+        // Add JsonObjectRequest to the RequestQueue
+        requestQueue.add(jsonObjectRequest);
     }
 }

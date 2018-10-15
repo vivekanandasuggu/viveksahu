@@ -1,0 +1,22 @@
+<resources>
+    <!-- <string name="app_name">Electus</string>-->
+    <string name="appname">Electus</string>
+
+    <string name="next">NEXT</string>
+    <string name="skip">SKIP</string>
+    <string name="start">GOT IT</string>
+
+    <string name="slide_1_title">Planning and Execution</string>
+    <string name="slide_1_desc">Board Curriculum design ,IIT/NEET foundation course design,Year wise schedule,Lesson plans,Student Activities,Educational events</string>
+
+    <string name="slide_2_title">Staff Recruitment and Training</string>
+    <string name="slide_2_desc">Staff requirement analysis,Staff procurement and appointment,Staff training,Staff skill enrichment</string>
+
+    <string name="slide_3_title">Online exam portal</string>
+    <string name="slide_3_desc">Marks analysis,Error analysis,Time analysis,Offline exam analysis,Online platform for exams</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="previous"><![CDATA[<<Previous]]></string>
+    <string name="next_btn"><![CDATA[Next>>]]></string>
+</resources>

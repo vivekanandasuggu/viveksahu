@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activities.ExamActivity">
+    <android.support.v4.view.ViewPager
+        android:id="@+id/viewpager"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_margin="20dp"/>
+    <TextView
+        android:id="@+id/tv_previous"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="16dp"
+        android:padding="10dp"
+        android:layout_below="@+id/viewpager"
+        android:text="@string/previous"/>
+    <TextView
+        android:id="@+id/tv_next"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/next_btn"
+        android:textSize="16dp"
+        android:padding="10dp"
+        android:layout_below="@+id/viewpager"
+        android:layout_alignParentRight="true"/>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_question"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_next"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp">
+    </android.support.v7.widget.RecyclerView>
+</RelativeLayout>

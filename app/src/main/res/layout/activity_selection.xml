@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activities.SelectionActivity">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="53dp"
+        android:background="@color/colorPrimary"
+        android:text="Login to Electus"
+        android:textSize="20sp"
+        android:gravity="center"
+        android:textColor="#ffffff"
+        android:textStyle="bold"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="60dp">
+        <TextView
+            android:id="@+id/tv_school"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="School"
+            android:textColor="#353538"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:layout_marginLeft="30dp"/>
+        <Spinner
+            android:id="@+id/spinner_schools"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_below="@+id/tv_school"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/rounded_background_spinner">
+        </Spinner>
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center"/>
+
+        <Button
+            android:id="@+id/btn_submit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="40dp"
+            android:layout_marginRight="30dp"
+            android:text="submit"
+            android:textSize="16dp"
+            android:textColor="#fff"
+            android:background="@drawable/rounded_corner_button_blue"
+            android:layout_below="@+id/spinner_schools"/>
+    </LinearLayout>
+
+</RelativeLayout>
