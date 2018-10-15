@@ -1,6 +1,7 @@
 package com.educare.electus.activities;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -18,6 +19,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.educare.electus.Dialogues.ValidationAlertDialog;
 import com.educare.electus.R;
 import com.educare.electus.model.ClientsList;
 import com.educare.electus.utilities.AppConstants;
@@ -55,10 +57,13 @@ public class SelectionActivity extends AppCompatActivity {
         btn_submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-              /*  Intent examIntent=new Intent(SelectionActivity.this,ExamActivity.class);
-                startActivity(examIntent);*/
-              sendSelectedClient();
+                Intent examIntent=new Intent(SelectionActivity.this,ExamActivity.class);
+                startActivity(examIntent);
+          /*    if(selectedClient!=null) {
+                  sendSelectedClient();
+              }else{
+                new ValidationAlertDialog(SelectionActivity.this,"Error","Please select the client");
+              }*/
 
             }
         });
@@ -149,7 +154,7 @@ public class SelectionActivity extends AppCompatActivity {
         // Initialize a new JsonObjectRequest instance
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
                 Request.Method.GET,
-                AppServiceUrls.GET_CLIENTS_SELECTION,
+                AppServiceUrls.GET_CLIENTS_SELECTION+selectedClient,
                 null,
                 new Response.Listener<JSONObject>() {
                     @Override
@@ -173,14 +178,16 @@ public class SelectionActivity extends AppCompatActivity {
                         Log.e("ElectusClinets", "mStatusCode  " + mStatusCode);
                         progressDialog.dismiss();
                     }
-                }) {
+                });
+
+     /*   {
 
             @Override
             protected Response<JSONObject> parseNetworkResponse(NetworkResponse response) {
                  mStatusCode = response.statusCode;
                 return super.parseNetworkResponse(response);
             }
-        };
+        };*/
 
         // Add JsonObjectRequest to the RequestQueue
         requestQueue.add(jsonObjectRequest);

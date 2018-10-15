@@ -43,7 +43,7 @@ public class ExamActivity extends AppCompatActivity {
         setContentView(R.layout.activity_exam);
         tv_previous=findViewById(R.id.tv_previous);
         tv_next=findViewById(R.id.tv_next);
-        for (int i = 0; i < 6; i++) {
+        for (int i = 0; i < 10; i++) {
             QuestionsModel questionsModel = new QuestionsModel();
             questionsModel.setViewed(false);
             questionsModel.setAnswered(false);
@@ -55,8 +55,10 @@ public class ExamActivity extends AppCompatActivity {
         viewPager = (ViewPager) findViewById(R.id.viewpager);
         viewPager.setAdapter(new ExamPagerAdapter(getSupportFragmentManager()));
         rv_questions = findViewById(R.id.rv_question);
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 5);
-        rv_questions.setLayoutManager(gridLayoutManager);
+        LinearLayoutManager linearLayoutManager=new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false);
+        rv_questions.setLayoutManager(linearLayoutManager);
+       /* GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 5);
+        rv_questions.setLayoutManager(gridLayoutManager);*/
         questionsRecyclerViewAdapter = new QuestionsRecyclerViewAdapter(this, questionsModelArrayList);
         rv_questions.setAdapter(questionsRecyclerViewAdapter);
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
@@ -70,6 +72,11 @@ public class ExamActivity extends AppCompatActivity {
                 questionsModelArrayList.get(i).setViewed(true);
                 questionsRecyclerViewAdapter.notifyDataSetChanged();
                 Toast.makeText(ExamActivity.this, "Current Page" + i, Toast.LENGTH_SHORT).show();
+                if(i>5){
+                    rv_questions.scrollToPosition(9);
+                }else{
+                    rv_questions.scrollToPosition(0);
+                }
             }
 
             @Override
@@ -88,7 +95,7 @@ public class ExamActivity extends AppCompatActivity {
         tv_next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(viewPager.getCurrentItem()<5)
+                if(viewPager.getCurrentItem()<9)
                 {
                     viewPager.setCurrentItem(viewPager.getCurrentItem()+1);
                 }
@@ -122,7 +129,7 @@ public class ExamActivity extends AppCompatActivity {
 
         @Override
         public int getCount() {
-            return 6;
+            return 10;
         }
     }
 
@@ -164,7 +171,7 @@ public class ExamActivity extends AppCompatActivity {
 
         @Override
         public int getItemCount() {
-            return 6;
+            return 10;
         }
 
         class QuestionsViewHolder extends RecyclerView.ViewHolder {
