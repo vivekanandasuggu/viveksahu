@@ -23,4 +23,6 @@
     <string name="sign_in_with_otp">Sign In With OTP</string>
     <string name="sign_in">Sign In</string>
     <string name="need_help">Need help?</string>
+    <string name="error_description">Some thing went wrong please try after some time</string>
+    <string name="error_failure_header">Error</string>
 </resources>

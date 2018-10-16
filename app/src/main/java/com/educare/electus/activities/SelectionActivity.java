@@ -133,6 +133,7 @@ public class SelectionActivity extends AppCompatActivity {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         // Do something when error occurred
+                        new ValidationAlertDialog(SelectionActivity.this,getString(R.string.error_failure_header),getString(R.string.error_description));
                         Log.v("ElectusClinets", "Electus" + error.toString());
                         progressDialog.dismiss();
                     }
@@ -169,6 +170,7 @@ public class SelectionActivity extends AppCompatActivity {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         // Do something when error occurred
+                        new ValidationAlertDialog(SelectionActivity.this,getString(R.string.error_failure_header),getString(R.string.error_description));
                         Toast.makeText(SelectionActivity.this, ""+mStatusCode, Toast.LENGTH_SHORT).show();
                         NetworkResponse networkResponse = error.networkResponse;
                        /* if (networkResponse != null && networkResponse.statusCode) {

@@ -1,0 +1,148 @@
+package com.educare.electus.activities;
+
+import android.app.ProgressDialog;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.android.volley.NetworkResponse;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
+import com.educare.electus.Dialogues.ValidationAlertDialog;
+import com.educare.electus.R;
+import com.educare.electus.utilities.AppServiceUrls;
+
+import org.json.JSONObject;
+
+public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
+    private RelativeLayout rlHeader;
+    private ImageView ivBackArrow;
+    private TextView tvHeader;
+    private EditText etUserName;
+    private EditText etPassword;
+    private LinearLayout llBtnsLayout;
+    private Button btnSubmit;
+    private Button btnOtp;
+    private TextView tvForgotPassword;
+    private TextView tvNeedHelp;
+    private ProgressDialog progressDialog;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_login);
+        findViews();
+    }
+
+    private void findViews() {
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage("Loading Please Wait...");
+        rlHeader = (RelativeLayout) findViewById(R.id.rl_header);
+        ivBackArrow = (ImageView) findViewById(R.id.iv_back_arrow);
+        tvHeader = (TextView) findViewById(R.id.tv_header);
+        etUserName = (EditText) findViewById(R.id.et_user_name);
+        etPassword = (EditText) findViewById(R.id.et_password);
+        llBtnsLayout = (LinearLayout) findViewById(R.id.ll_btns_layout);
+        btnSubmit = (Button) findViewById(R.id.btn_submit);
+        btnOtp = (Button) findViewById(R.id.btn_otp);
+        tvForgotPassword = (TextView) findViewById(R.id.tv_forgot_password);
+        tvNeedHelp = (TextView) findViewById(R.id.tv_need_help);
+
+        btnSubmit.setOnClickListener(this);
+        btnOtp.setOnClickListener(this);
+    }
+
+    @Override
+    public void onClick(View v) {
+        if (v == btnSubmit) {
+            // Handle clicks for btnSubmit
+            if(validate()) {
+             //   signInUser(etUserName.getText().toString().trim(), etPassword.getText().toString().trim());
+            }
+
+        } else if (v == btnOtp) {
+            // Handle clicks for btnOtp
+        }
+    }
+
+    private void signInUser(String userName,String password) {
+        progressDialog.show();
+        final RequestQueue requestQueue = Volley.newRequestQueue(this);
+        // Initialize a new JsonObjectRequest instance
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
+                Request.Method.GET,
+                AppServiceUrls.GET_CLIENTS_SELECTION,
+                null,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+
+                        Log.v("ElectusClinets", "Electus" + response.toString());
+                        //    Log.e("ElectusClinets", "mStatusCode  " + mStatusCode);
+                        progressDialog.dismiss();
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+
+                        new ValidationAlertDialog(LoginActivity.this,getString(R.string.error_failure_header),getString(R.string.error_description));
+                        // Do something when error occurred
+                        //    Toast.makeText(SelectionActivity.this, ""+mStatusCode, Toast.LENGTH_SHORT).show();
+                        NetworkResponse networkResponse = error.networkResponse;
+                       /* if (networkResponse != null && networkResponse.statusCode) {
+                            // HTTP Status Code: 401 Unauthorized
+                        }*/
+                        //  Log.e("ElectusClinets", "Electus  " + error.getMessage());
+                        //   Log.e("ElectusClinets", "mStatusCode  " + mStatusCode);
+                        progressDialog.dismiss();
+                    }
+                });
+
+     /*   {
+
+            @Override
+            protected Response<JSONObject> parseNetworkResponse(NetworkResponse response) {
+                 mStatusCode = response.statusCode;
+                return super.parseNetworkResponse(response);
+            }
+        };*/
+
+        // Add JsonObjectRequest to the RequestQueue
+        requestQueue.add(jsonObjectRequest);
+    }
+
+    private boolean validate(){
+        if(!(etUserName.getText().toString().trim().length()>0))
+        {
+            new ValidationAlertDialog(LoginActivity.this,"Error","Please enter username");
+            return false;
+        }else if(!(etPassword.getText().toString().trim().length()>0))
+        {
+            new ValidationAlertDialog(LoginActivity.this,"Error","Please enter password");
+            return false;
+        }
+        return true;
+    }
+
+
+}
+
+
+
+
+
+
+
