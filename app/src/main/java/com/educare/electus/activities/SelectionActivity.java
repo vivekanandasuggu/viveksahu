@@ -50,7 +50,7 @@ public class SelectionActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_selection);
         progressDialog = new ProgressDialog(this);
-        progressDialog.setTitle("Loading Please Wait...");
+        progressDialog.setMessage("Loading Please Wait...");
         spinner = (Spinner) findViewById(R.id.spinner_schools);
         btn_submit = findViewById(R.id.btn_submit);
         getClientsList();
