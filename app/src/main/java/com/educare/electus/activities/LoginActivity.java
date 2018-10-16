@@ -48,7 +48,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     private void findViews() {
         progressDialog = new ProgressDialog(this);
-        progressDialog.setMessage("Loading Please Wait...");
+        progressDialog.setMessage(getString(R.string.loading_please_wait));
         rlHeader = (RelativeLayout) findViewById(R.id.rl_header);
         ivBackArrow = (ImageView) findViewById(R.id.iv_back_arrow);
         tvHeader = (TextView) findViewById(R.id.tv_header);
@@ -74,6 +74,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         } else if (v == btnOtp) {
             // Handle clicks for btnOtp
+        } else if(v==tvForgotPassword){
+
         }
     }
 
@@ -88,9 +90,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
-
                         Log.v("ElectusClinets", "Electus" + response.toString());
-                        //    Log.e("ElectusClinets", "mStatusCode  " + mStatusCode);
                         progressDialog.dismiss();
                     }
                 },
@@ -99,26 +99,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     public void onErrorResponse(VolleyError error) {
 
                         new ValidationAlertDialog(LoginActivity.this,getString(R.string.error_failure_header),getString(R.string.error_description));
-                        // Do something when error occurred
-                        //    Toast.makeText(SelectionActivity.this, ""+mStatusCode, Toast.LENGTH_SHORT).show();
                         NetworkResponse networkResponse = error.networkResponse;
-                       /* if (networkResponse != null && networkResponse.statusCode) {
-                            // HTTP Status Code: 401 Unauthorized
-                        }*/
-                        //  Log.e("ElectusClinets", "Electus  " + error.getMessage());
-                        //   Log.e("ElectusClinets", "mStatusCode  " + mStatusCode);
                         progressDialog.dismiss();
                     }
                 });
-
-     /*   {
-
-            @Override
-            protected Response<JSONObject> parseNetworkResponse(NetworkResponse response) {
-                 mStatusCode = response.statusCode;
-                return super.parseNetworkResponse(response);
-            }
-        };*/
 
         // Add JsonObjectRequest to the RequestQueue
         requestQueue.add(jsonObjectRequest);

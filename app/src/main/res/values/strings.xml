@@ -25,4 +25,5 @@
     <string name="need_help">Need help?</string>
     <string name="error_description">Some thing went wrong please try after some time</string>
     <string name="error_failure_header">Error</string>
+    <string name="loading_please_wait">Loading Please Wait...</string>
 </resources>
