@@ -76,6 +76,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             // Handle clicks for btnOtp
         } else if(v==tvForgotPassword){
 
+        } else if(v==ivBackArrow){
+            onBackPressed();
         }
     }
 
