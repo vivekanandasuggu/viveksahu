@@ -1,6 +1,7 @@
 package com.educare.electus.activities;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -59,29 +60,31 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         btnOtp = (Button) findViewById(R.id.btn_otp);
         tvForgotPassword = (TextView) findViewById(R.id.tv_forgot_password);
         tvNeedHelp = (TextView) findViewById(R.id.tv_need_help);
-
         btnSubmit.setOnClickListener(this);
         btnOtp.setOnClickListener(this);
+        ivBackArrow.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
         if (v == btnSubmit) {
             // Handle clicks for btnSubmit
-            if(validate()) {
-             //   signInUser(etUserName.getText().toString().trim(), etPassword.getText().toString().trim());
+            if (validate()) {
+                //   signInUser(etUserName.getText().toString().trim(), etPassword.getText().toString().trim());
+                Intent examIntent=new Intent(this,ExamActivity.class);
+                startActivity(examIntent);
             }
 
         } else if (v == btnOtp) {
             // Handle clicks for btnOtp
-        } else if(v==tvForgotPassword){
+        } else if (v == tvForgotPassword) {
 
-        } else if(v==ivBackArrow){
+        } else if (v == ivBackArrow) {
             onBackPressed();
         }
     }
 
-    private void signInUser(String userName,String password) {
+    private void signInUser(String userName, String password) {
         progressDialog.show();
         final RequestQueue requestQueue = Volley.newRequestQueue(this);
         // Initialize a new JsonObjectRequest instance
@@ -100,7 +103,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     @Override
                     public void onErrorResponse(VolleyError error) {
 
-                        new ValidationAlertDialog(LoginActivity.this,getString(R.string.error_failure_header),getString(R.string.error_description));
+                        new ValidationAlertDialog(LoginActivity.this, getString(R.string.error_failure_header), getString(R.string.error_description));
                         NetworkResponse networkResponse = error.networkResponse;
                         progressDialog.dismiss();
                     }
@@ -110,14 +113,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         requestQueue.add(jsonObjectRequest);
     }
 
-    private boolean validate(){
-        if(!(etUserName.getText().toString().trim().length()>0))
-        {
-            new ValidationAlertDialog(LoginActivity.this,"Error","Please enter username");
+    private boolean validate() {
+        if (!(etUserName.getText().toString().trim().length() > 0)) {
+            new ValidationAlertDialog(LoginActivity.this, "Error", "Please enter username");
             return false;
-        }else if(!(etPassword.getText().toString().trim().length()>0))
-        {
-            new ValidationAlertDialog(LoginActivity.this,"Error","Please enter password");
+        } else if (!(etPassword.getText().toString().trim().length() > 0)) {
+            new ValidationAlertDialog(LoginActivity.this, "Error", "Please enter password");
             return false;
         }
         return true;

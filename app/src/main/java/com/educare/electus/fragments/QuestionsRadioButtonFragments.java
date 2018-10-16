@@ -1,6 +1,7 @@
 package com.educare.electus.fragments;
 
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
@@ -9,9 +10,11 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RadioButton;
 import android.widget.TextView;
 
 import com.educare.electus.R;
+import com.educare.electus.interfaces.ExamActivityCommunicator;
 import com.educare.electus.utilities.AppConstants;
 
 /**
@@ -21,11 +24,17 @@ public class QuestionsRadioButtonFragments extends Fragment {
     private TextView tv_qstn;
     private RecyclerView rv_answer_options;
     private int questionNumber=0;
+    private ExamActivityCommunicator examActivityCommunicator;
 
     public QuestionsRadioButtonFragments() {
         // Required empty public constructor
     }
 
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        examActivityCommunicator= (ExamActivityCommunicator) context;
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -54,8 +63,21 @@ public class QuestionsRadioButtonFragments extends Fragment {
         }
 
         @Override
-        public void onBindViewHolder(@NonNull AnswersHolder answersHolder, int i) {
+        public void onBindViewHolder(@NonNull final AnswersHolder answersHolder, final int position) {
+         /* if(answersHolder.radio_btn.isChecked())
+          {
+              examActivityCommunicator.selectedAnswerPosition(i);
+          }else{
 
+          }*/
+   /*      answersHolder.radio_btn.setOnClickListener(new View.OnClickListener() {
+             @Override
+             public void onClick(View v) {
+                 if(answersHolder.radio_btn.isChecked()){
+                     examActivityCommunicator.selectedAnswerPosition(position);
+                 }
+             }
+         });*/
         }
 
         @Override
@@ -64,9 +86,10 @@ public class QuestionsRadioButtonFragments extends Fragment {
         }
 
         class AnswersHolder extends RecyclerView.ViewHolder{
-
+          RadioButton radio_btn;
             public AnswersHolder(@NonNull View itemView) {
                 super(itemView);
+                radio_btn=itemView.findViewById(R.id.radio_btn);
             }
         }
     }

@@ -37,6 +37,8 @@
     android:layout_marginRight="20dp"
     android:layout_marginLeft="20dp"
     android:hint="User Name"
+    android:maxLines="1"
+    android:inputType="text"
     android:paddingLeft="10dp"
     android:paddingTop="10dp"
     android:paddingBottom="10dp"

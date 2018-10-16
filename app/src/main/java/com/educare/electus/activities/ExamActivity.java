@@ -25,17 +25,19 @@ import com.educare.electus.R;
 import com.educare.electus.fragments.QuestionsCheckboxFragment;
 import com.educare.electus.fragments.QuestionsRadioButtonFragments;
 import com.educare.electus.fragments.TutorialFragment;
+import com.educare.electus.interfaces.ExamActivityCommunicator;
 import com.educare.electus.model.QuestionsModel;
 import com.educare.electus.utilities.AppConstants;
 
 import java.util.ArrayList;
 
-public class ExamActivity extends AppCompatActivity {
+public class ExamActivity extends AppCompatActivity implements ExamActivityCommunicator {
     private RecyclerView rv_questions;
     private ArrayList<QuestionsModel> questionsModelArrayList = new ArrayList<>();
     private QuestionsRecyclerViewAdapter questionsRecyclerViewAdapter;
     private ViewPager viewPager;
     private TextView tv_previous,tv_next;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -103,6 +105,11 @@ public class ExamActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    @Override
+    public void selectedAnswerPosition(int position) {
+        Toast.makeText(this,"Selected Answer "+position,Toast.LENGTH_SHORT).show();
     }
 
     class ExamPagerAdapter extends FragmentPagerAdapter {
