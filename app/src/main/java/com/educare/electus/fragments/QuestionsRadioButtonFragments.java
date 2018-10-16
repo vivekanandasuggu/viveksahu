@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RadioButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.educare.electus.R;
 import com.educare.electus.interfaces.ExamActivityCommunicator;
@@ -25,6 +26,7 @@ public class QuestionsRadioButtonFragments extends Fragment {
     private RecyclerView rv_answer_options;
     private int questionNumber=0;
     private ExamActivityCommunicator examActivityCommunicator;
+    private int lastSelectedPosition = -1;
 
     public QuestionsRadioButtonFragments() {
         // Required empty public constructor
@@ -78,6 +80,10 @@ public class QuestionsRadioButtonFragments extends Fragment {
                  }
              }
          });*/
+              if(lastSelectedPosition==position){
+                  answersHolder.radio_btn.setChecked(true);
+              }
+
         }
 
         @Override
@@ -90,6 +96,14 @@ public class QuestionsRadioButtonFragments extends Fragment {
             public AnswersHolder(@NonNull View itemView) {
                 super(itemView);
                 radio_btn=itemView.findViewById(R.id.radio_btn);
+                radio_btn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        lastSelectedPosition = getAdapterPosition();
+                        Toast.makeText(getActivity(),"Selected position "+lastSelectedPosition,Toast.LENGTH_SHORT).show();
+                        notifyDataSetChanged();
+                    }
+                });
             }
         }
     }

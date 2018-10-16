@@ -23,8 +23,11 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.educare.electus.Dialogues.ValidationAlertDialog;
 import com.educare.electus.R;
+import com.educare.electus.utilities.AppConstants;
 import com.educare.electus.utilities.AppServiceUrls;
+import com.educare.electus.utilities.PreferenceManager;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
@@ -39,6 +42,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private TextView tvForgotPassword;
     private TextView tvNeedHelp;
     private ProgressDialog progressDialog;
+    // private String loginURL="http://192.168.0.4:8092/ElectusEduCare/checklogin?username=09111&password=09111";
+    private String loginURL = "http://192.168.0.4:8092/ElectusEduCare/checklogin?username=";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,18 +75,21 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         if (v == btnSubmit) {
             // Handle clicks for btnSubmit
             if (validate()) {
-                //   signInUser(etUserName.getText().toString().trim(), etPassword.getText().toString().trim());
-                Intent examIntent=new Intent(this,ExamActivity.class);
-                startActivity(examIntent);
+                signInUser(etUserName.getText().toString().trim(), etPassword.getText().toString().trim());
             }
 
         } else if (v == btnOtp) {
             // Handle clicks for btnOtp
         } else if (v == tvForgotPassword) {
-
+       //Here we have to write the code for the forgot password
         } else if (v == ivBackArrow) {
             onBackPressed();
         }
+    }
+
+    private void navigate() {
+        Intent examIntent = new Intent(this, ExamActivity.class);
+        startActivity(examIntent);
     }
 
     private void signInUser(String userName, String password) {
@@ -90,19 +98,27 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         // Initialize a new JsonObjectRequest instance
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
                 Request.Method.GET,
-                AppServiceUrls.GET_CLIENTS_SELECTION,
+                loginURL + userName + "&password=" + password + "&keyDS=" + PreferenceManager.getInt(LoginActivity.this,
+                        AppConstants.SELECTED_DATABASE, 0),
                 null,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
                         Log.v("ElectusClinets", "Electus" + response.toString());
+                        try {
+                            if (response.has(AppConstants.STUDENT_ID) && response.get(AppConstants.STUDENT_ID) != null)
+                                PreferenceManager.saveString(LoginActivity.this, AppConstants.STUDENT_ID, response.get(AppConstants.STUDENT_ID).toString());
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
                         progressDialog.dismiss();
+                     //   navigate();
                     }
                 },
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-
                         new ValidationAlertDialog(LoginActivity.this, getString(R.string.error_failure_header), getString(R.string.error_description));
                         NetworkResponse networkResponse = error.networkResponse;
                         progressDialog.dismiss();

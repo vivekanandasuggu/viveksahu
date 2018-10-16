@@ -8,7 +8,7 @@ public class ClientsList {
 
     @SerializedName("clientid")
     @Expose
-    private Integer clientid;
+    private int clientid;
     @SerializedName("clientname")
     @Expose
     private String clientname;
@@ -16,11 +16,11 @@ public class ClientsList {
     @Expose
     private String status;
 
-    public Integer getClientid() {
+    public int getClientid() {
         return clientid;
     }
 
-    public void setClientid(Integer clientid) {
+    public void setClientid(int clientid) {
         this.clientid = clientid;
     }
 
