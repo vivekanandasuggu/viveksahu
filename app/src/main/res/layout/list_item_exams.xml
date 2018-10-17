@@ -45,6 +45,7 @@
         android:layout_marginRight="40dp"
         android:layout_below="@+id/tv_date"/>
     <Button
+        android:id="@+id/btn_start_exam"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="start exam"

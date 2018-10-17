@@ -5,6 +5,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.TextView;
 
 import com.educare.electus.R;
 import com.educare.electus.fragments.QuestionsCheckboxFragment;
@@ -29,9 +31,13 @@ public class ExamsListAdapter extends RecyclerView.Adapter<ExamsListAdapter.Exam
     }
 
     class ExamsListHolder extends RecyclerView.ViewHolder{
-
+    private Button btn_start_exam;
+    private TextView tv_exam_name,tv_subject;
         public ExamsListHolder(@NonNull View itemView) {
             super(itemView);
-        }
+            btn_start_exam=itemView.findViewById(R.id.btn_start_exam);
+            tv_exam_name=itemView.findViewById(R.id.tv_exam_name);
+            tv_subject=itemView.findViewById(R.id.tv_subject);
+            }
     }
 }
