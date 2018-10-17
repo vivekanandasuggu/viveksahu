@@ -113,7 +113,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         }
 
                         progressDialog.dismiss();
-                     //   navigate();
+                        navigate();
                     }
                 },
                 new Response.ErrorListener() {
