@@ -26,4 +26,11 @@
     <string name="error_description">Some thing went wrong please try after some time</string>
     <string name="error_failure_header">Error</string>
     <string name="loading_please_wait">Loading Please Wait...</string>
+    <string name="exam_name">Exam Name</string>
+    <string name="subject">subject</string>
+    <string name="date">date</string>
+    <string name="start_time">start time</string>
+    <string name="end_time">End time</string>
+    <string name="start_exam">start exam</string>
+    <string name="exams_list">Exams List</string>
 </resources>

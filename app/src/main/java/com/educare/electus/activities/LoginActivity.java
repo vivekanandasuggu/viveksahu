@@ -30,6 +30,8 @@ import com.educare.electus.utilities.PreferenceManager;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import static com.educare.electus.utilities.AppServiceUrls.loginURL;
+
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
     private RelativeLayout rlHeader;
     private ImageView ivBackArrow;
@@ -43,7 +45,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private TextView tvNeedHelp;
     private ProgressDialog progressDialog;
     // private String loginURL="http://192.168.0.4:8092/ElectusEduCare/checklogin?username=09111&password=09111";
-    private String loginURL = "http://192.168.0.4:8092/ElectusEduCare/checklogin?username=";
+   // private String loginURL = AppServiceUrls.BASE_URL+"ElectusEduCare/checklogin?username=";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -6,41 +6,40 @@
         android:id="@+id/tv_exam_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Exam Name"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="10dp"/>
+        android:text="@string/exam_name"
+        android:layout_marginTop="@dimen/margintop_list"
+        android:layout_marginLeft="@dimen/marginleft_list"/>
     <TextView
         android:id="@+id/tv_subject"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="subject"
+        android:text="@string/subject"
         android:layout_below="@+id/tv_exam_name"
         android:layout_marginTop="5dp"
-        android:layout_marginLeft="10dp"/>
+        android:layout_marginLeft="@dimen/marginleft_list"/>
     <TextView
         android:id="@+id/tv_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="date"
+        android:text="@string/date"
         android:layout_below="@+id/tv_subject"
         android:layout_marginTop="5dp"
-        android:layout_marginLeft="10dp"/>
+        android:layout_marginLeft="@dimen/marginleft_list"/>
     <TextView
         android:id="@+id/tv_start_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="start time"
+        android:text="@string/start_time"
         android:layout_marginTop="5dp"
-        android:layout_marginLeft="10dp"
+        android:layout_marginLeft="@dimen/marginleft_list"
         android:layout_below="@+id/tv_date"/>
-
     <TextView
         android:id="@+id/tv_end_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="End time"
+        android:text="@string/end_time"
         android:layout_marginTop="5dp"
-        android:layout_marginLeft="10dp"
+        android:layout_marginLeft="@dimen/marginleft_list"
         android:layout_alignParentRight="true"
         android:layout_marginRight="40dp"
         android:layout_below="@+id/tv_date"/>
@@ -48,7 +47,24 @@
         android:id="@+id/btn_start_exam"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="start exam"
+        android:text="@string/start_exam"
         android:layout_below="@+id/tv_end_time"
         android:layout_centerHorizontal="true"/>
+    <Button
+        android:id="@+id/btn_instructions"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="instructions"
+        android:textSize="10sp"
+        android:layout_below="@+id/tv_end_time"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="10dp"/>
+
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@id/btn_start_exam"
+        android:layout_marginTop="@dimen/margintop_list"
+        android:background="@drawable/rounded_corner_button_blue"/>
 </RelativeLayout>

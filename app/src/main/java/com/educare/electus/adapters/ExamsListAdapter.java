@@ -21,23 +21,30 @@ public class ExamsListAdapter extends RecyclerView.Adapter<ExamsListAdapter.Exam
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ExamsListHolder examsListHolder, int i) {
+    public void onBindViewHolder(@NonNull ExamsListHolder examsListHolder, int position) {
+         examsListHolder.tv_exam_name.setText("Exam Name : "+"");
+         examsListHolder.tv_exam_name.setText("Subject : "+"");
+
+
 
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return 5;
     }
 
     class ExamsListHolder extends RecyclerView.ViewHolder{
     private Button btn_start_exam;
-    private TextView tv_exam_name,tv_subject;
+    private TextView tv_exam_name,tv_subject,tv_date,tv_start_time,tv_end_time;
         public ExamsListHolder(@NonNull View itemView) {
             super(itemView);
             btn_start_exam=itemView.findViewById(R.id.btn_start_exam);
             tv_exam_name=itemView.findViewById(R.id.tv_exam_name);
             tv_subject=itemView.findViewById(R.id.tv_subject);
+            tv_date=itemView.findViewById(R.id.tv_date);
+            tv_start_time=itemView.findViewById(R.id.tv_start_time);
+            tv_end_time=itemView.findViewById(R.id.tv_end_time);
             }
     }
 }

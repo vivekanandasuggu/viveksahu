@@ -5,11 +5,33 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".activities.ExamsListActivity">
-
+    <RelativeLayout
+        android:id="@+id/rl_header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary">
+        <ImageView
+            android:id="@+id/iv_back_arrow"
+            android:layout_width="@dimen/back_button_width"
+            android:layout_height="@dimen/back_button_height"
+            android:paddingLeft="10dp"
+            android:src="@drawable/leftarrow"/>
+        <TextView
+            android:id="@+id/tv_header"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:layout_marginLeft="20dp"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/iv_back_arrow"
+            android:text="@string/exams_list"
+            android:textSize="@dimen/header_title"
+            android:textStyle="bold"/>
+    </RelativeLayout>
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rv_exams_list"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/rl_header">
     </android.support.v7.widget.RecyclerView>
-
 </RelativeLayout>
