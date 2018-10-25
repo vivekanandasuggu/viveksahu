@@ -3,26 +3,56 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
     <TextView
-        android:id="@+id/tv_exam_name"
+        android:id="@+id/tv_exam_type"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/exam_type"
+        android:visibility="gone"
+        android:layout_marginTop="@dimen/margintop_list"
+        android:layout_marginLeft="@dimen/marginleft_list"/>
+
+    <TextView
+        android:id="@+id/tv_exam_name_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/exam_name"
         android:layout_marginTop="@dimen/margintop_list"
+        android:layout_below="@+id/tv_exam_type"
+        android:layout_marginLeft="@dimen/marginleft_list"/>
+    <TextView
+        android:id="@+id/tv_exam_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/testing_exam"
+        android:layout_marginTop="@dimen/margintop_list"
+        android:layout_below="@+id/tv_exam_type"
+        android:layout_toRightOf="@+id/tv_exam_name_label"
+        android:visibility="gone"
+        android:layout_marginLeft="5dp"/>
+    <TextView
+        android:id="@+id/tv_subject_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/subject"
+        android:layout_below="@+id/tv_exam_name_label"
+        android:layout_marginTop="5dp"
         android:layout_marginLeft="@dimen/marginleft_list"/>
     <TextView
         android:id="@+id/tv_subject"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/subject"
-        android:layout_below="@+id/tv_exam_name"
+        android:text="Maths,physics,chemistry"
+        android:layout_below="@+id/tv_exam_name_label"
         android:layout_marginTop="5dp"
-        android:layout_marginLeft="@dimen/marginleft_list"/>
+        android:layout_toRightOf="@+id/tv_subject_label"
+        android:layout_marginLeft="@dimen/marginleft_list"
+        android:visibility="gone"/>
     <TextView
         android:id="@+id/tv_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/date"
-        android:layout_below="@+id/tv_subject"
+        android:layout_below="@+id/tv_subject_label"
         android:layout_marginTop="5dp"
         android:layout_marginLeft="@dimen/marginleft_list"/>
     <TextView
@@ -54,7 +84,7 @@
         android:id="@+id/btn_instructions"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="instructions"
+        android:text="@string/instructions"
         android:textSize="10sp"
         android:layout_below="@+id/tv_end_time"
         android:layout_alignParentRight="true"

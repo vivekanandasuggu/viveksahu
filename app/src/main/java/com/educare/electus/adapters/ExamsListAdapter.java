@@ -1,5 +1,6 @@
 package com.educare.electus.adapters;
 
+import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -9,9 +10,20 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.educare.electus.R;
+import com.educare.electus.activities.ExamsListActivity;
 import com.educare.electus.fragments.QuestionsCheckboxFragment;
+import com.educare.electus.model.ExamsListModel;
+
+import java.util.List;
 
 public class ExamsListAdapter extends RecyclerView.Adapter<ExamsListAdapter.ExamsListHolder> {
+    private Context context;
+    private  List<ExamsListModel.Datum> examsList;
+    public ExamsListAdapter(Context context, List<ExamsListModel.Datum> examsList) {
+        this.context=context;
+        this.examsList=examsList;
+    }
+
     @NonNull
     @Override
     public ExamsListHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
@@ -22,8 +34,18 @@ public class ExamsListAdapter extends RecyclerView.Adapter<ExamsListAdapter.Exam
 
     @Override
     public void onBindViewHolder(@NonNull ExamsListHolder examsListHolder, int position) {
-         examsListHolder.tv_exam_name.setText("Exam Name : "+"");
-         examsListHolder.tv_exam_name.setText("Subject : "+"");
+         examsListHolder.tv_exam_name.setText("Exam Name : "+examsList.get(position).getExamname());
+         StringBuffer stringBuffer=new StringBuffer();
+         List<String> subjectList=examsList.get(position).getSubnamelist();
+         for(int i=0;i<subjectList.size();i++){
+             stringBuffer.append(subjectList.get(i));
+           //  stringBuffer.append(",");
+         }
+         examsListHolder.tv_subject.setText("Subject : "+stringBuffer.toString());
+         examsListHolder.tv_date.setText("Date : "+examsList.get(position).getSlotdate());
+         examsListHolder.tv_start_time.setText("Start time : "+examsList.get(position).getStarttime());
+         examsListHolder.tv_end_time.setText("End time : "+examsList.get(position).getEndtime());
+
 
 
 
@@ -31,7 +53,7 @@ public class ExamsListAdapter extends RecyclerView.Adapter<ExamsListAdapter.Exam
 
     @Override
     public int getItemCount() {
-        return 5;
+        return examsList.size();
     }
 
     class ExamsListHolder extends RecyclerView.ViewHolder{

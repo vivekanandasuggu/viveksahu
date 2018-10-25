@@ -90,7 +90,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
 
     private void navigate() {
-        Intent examIntent = new Intent(this, ExamActivity.class);
+        Intent examIntent = new Intent(this, ExamsListActivity.class);
         startActivity(examIntent);
     }
 
