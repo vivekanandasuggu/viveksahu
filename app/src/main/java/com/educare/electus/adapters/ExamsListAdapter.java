@@ -34,22 +34,19 @@ public class ExamsListAdapter extends RecyclerView.Adapter<ExamsListAdapter.Exam
 
     @Override
     public void onBindViewHolder(@NonNull ExamsListHolder examsListHolder, int position) {
-         examsListHolder.tv_exam_name.setText("Exam Name : "+examsList.get(position).getExamname());
+        examsListHolder.tv_exam_type.setText(examsList.get(position).getExamtype());
+         examsListHolder.tv_exam_name.setText(examsList.get(position).getExamname());
          StringBuffer stringBuffer=new StringBuffer();
          List<String> subjectList=examsList.get(position).getSubnamelist();
          for(int i=0;i<subjectList.size();i++){
              stringBuffer.append(subjectList.get(i));
            //  stringBuffer.append(",");
          }
-         examsListHolder.tv_subject.setText("Subject : "+stringBuffer.toString());
+         examsListHolder.tv_subject.setText(stringBuffer.toString());
          examsListHolder.tv_date.setText("Date : "+examsList.get(position).getSlotdate());
          examsListHolder.tv_start_time.setText("Start time : "+examsList.get(position).getStarttime());
          examsListHolder.tv_end_time.setText("End time : "+examsList.get(position).getEndtime());
-
-
-
-
-    }
+         }
 
     @Override
     public int getItemCount() {
@@ -58,7 +55,7 @@ public class ExamsListAdapter extends RecyclerView.Adapter<ExamsListAdapter.Exam
 
     class ExamsListHolder extends RecyclerView.ViewHolder{
     private Button btn_start_exam;
-    private TextView tv_exam_name,tv_subject,tv_date,tv_start_time,tv_end_time;
+    private TextView tv_exam_name,tv_subject,tv_date,tv_start_time,tv_end_time,tv_exam_type;
         public ExamsListHolder(@NonNull View itemView) {
             super(itemView);
             btn_start_exam=itemView.findViewById(R.id.btn_start_exam);
@@ -67,6 +64,7 @@ public class ExamsListAdapter extends RecyclerView.Adapter<ExamsListAdapter.Exam
             tv_date=itemView.findViewById(R.id.tv_date);
             tv_start_time=itemView.findViewById(R.id.tv_start_time);
             tv_end_time=itemView.findViewById(R.id.tv_end_time);
+            tv_exam_type=itemView.findViewById(R.id.tv_exam_type);
             }
     }
 }

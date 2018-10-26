@@ -3,13 +3,22 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
     <TextView
+        android:id="@+id/tv_exam_type_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/exam_type"
+        android:visibility="visible"
+        android:layout_marginTop="@dimen/margintop_list"
+        android:layout_marginLeft="@dimen/marginleft_list"/>
+
+    <TextView
         android:id="@+id/tv_exam_type"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/exam_type"
-        android:visibility="gone"
-        android:layout_marginTop="@dimen/margintop_list"
-        android:layout_marginLeft="@dimen/marginleft_list"/>
+        android:visibility="visible"
+        android:layout_toRightOf="@+id/tv_exam_name_label"
+        android:layout_marginTop="@dimen/margintop_list"/>
 
     <TextView
         android:id="@+id/tv_exam_name_label"
@@ -27,26 +36,26 @@
         android:layout_marginTop="@dimen/margintop_list"
         android:layout_below="@+id/tv_exam_type"
         android:layout_toRightOf="@+id/tv_exam_name_label"
-        android:visibility="gone"
+        android:visibility="visible"
         android:layout_marginLeft="5dp"/>
     <TextView
         android:id="@+id/tv_subject_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/subject"
-        android:layout_below="@+id/tv_exam_name_label"
+        android:layout_below="@+id/tv_exam_name"
         android:layout_marginTop="5dp"
         android:layout_marginLeft="@dimen/marginleft_list"/>
     <TextView
         android:id="@+id/tv_subject"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Maths,physics,chemistry"
-        android:layout_below="@+id/tv_exam_name_label"
+        android:text="@string/maths_physics_chemistry"
+        android:layout_below="@+id/tv_exam_name"
         android:layout_marginTop="5dp"
         android:layout_toRightOf="@+id/tv_subject_label"
         android:layout_marginLeft="@dimen/marginleft_list"
-        android:visibility="gone"/>
+        android:visibility="visible"/>
     <TextView
         android:id="@+id/tv_date"
         android:layout_width="wrap_content"
@@ -89,8 +98,6 @@
         android:layout_below="@+id/tv_end_time"
         android:layout_alignParentRight="true"
         android:layout_marginRight="10dp"/>
-
-
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"

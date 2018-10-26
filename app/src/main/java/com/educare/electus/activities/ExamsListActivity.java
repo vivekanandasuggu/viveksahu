@@ -1,6 +1,7 @@
 package com.educare.electus.activities;
 
 import android.app.ProgressDialog;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -9,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -30,7 +32,11 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.lang.reflect.Type;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 public class ExamsListActivity extends AppCompatActivity {
@@ -39,6 +45,9 @@ public class ExamsListActivity extends AppCompatActivity {
    private TextView tv_header;
     private ProgressDialog progressDialog;
     private TextView tv_no_exams;
+    Handler h = new Handler();
+    int delay = 15*1000; //1 second=1000 milisecond, 15*1000=15seconds
+    Runnable runnable;
 
 
     @Override
@@ -53,7 +62,7 @@ public class ExamsListActivity extends AppCompatActivity {
         LinearLayoutManager linearLayoutManager=new LinearLayoutManager(this);
         rv_exams_list.setLayoutManager(linearLayoutManager);
 
-        getExamsList();
+      //  getExamsList();
         }
     private void getExamsList() {
         progressDialog.show();
@@ -98,6 +107,56 @@ public class ExamsListActivity extends AppCompatActivity {
         );
         MySingleton.getInstance(this).addToRequestQueue(jsonObjectRequest);
     }
+    @Override
+    protected void onResume() {
+        //start handler as activity become visible
 
+        h.postDelayed( runnable = new Runnable() {
+            public void run() {
+                //do something
+                compareTime("20:11:13","14:49:00");
+                Toast.makeText(ExamsListActivity.this,"Executing",Toast.LENGTH_SHORT).show();
+                h.postDelayed(runnable, delay);
+            }
+        }, delay);
+
+        super.onResume();
+    }
+
+    @Override
+    protected void onPause() {
+        h.removeCallbacks(runnable); //stop handler when activity not visible
+        super.onPause();
+    }
+
+    private void compareTime(String startTime,String endTime){
+        try {
+            String string1 = "20:11:13";
+            Date time1 = new SimpleDateFormat("HH:mm:ss").parse(string1);
+            Calendar calendar1 = Calendar.getInstance();
+            calendar1.setTime(time1);
+
+            String string2 = "14:49:00";
+            Date time2 = new SimpleDateFormat("HH:mm:ss").parse(string2);
+            Calendar calendar2 = Calendar.getInstance();
+            calendar2.setTime(time2);
+            calendar2.add(Calendar.DATE, 1);
+
+            String someRandomTime = "01:00:00";
+            Date d = new SimpleDateFormat("HH:mm:ss").parse(someRandomTime);
+            Calendar calendar3 = Calendar.getInstance();
+            calendar3.setTime(d);
+            calendar3.add(Calendar.DATE, 1);
+
+            Date x = calendar3.getTime();
+            if (x.after(calendar1.getTime()) && x.before(calendar2.getTime())) {
+                //checkes whether the current time is between 14:49:00 and 20:11:13.
+                System.out.println(true);
+                Log.v("Electus","ExamStart"+"same time");
+            }
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+    }
 
 }
