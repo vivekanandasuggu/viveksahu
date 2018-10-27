@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.educare.electus.Dialogues.InstructionsDialog;
 import com.educare.electus.R;
 import com.educare.electus.activities.ExamsListActivity;
 import com.educare.electus.fragments.QuestionsCheckboxFragment;
@@ -46,7 +47,14 @@ public class ExamsListAdapter extends RecyclerView.Adapter<ExamsListAdapter.Exam
          examsListHolder.tv_date.setText("Date : "+examsList.get(position).getSlotdate());
          examsListHolder.tv_start_time.setText("Start time : "+examsList.get(position).getStarttime());
          examsListHolder.tv_end_time.setText("End time : "+examsList.get(position).getEndtime());
+         examsListHolder.btn_instructions.setOnClickListener(new View.OnClickListener() {
+             @Override
+             public void onClick(View v) {
+                 new InstructionsDialog(context,"Show Message");
+             }
+         });
          }
+
 
     @Override
     public int getItemCount() {
@@ -54,7 +62,7 @@ public class ExamsListAdapter extends RecyclerView.Adapter<ExamsListAdapter.Exam
     }
 
     class ExamsListHolder extends RecyclerView.ViewHolder{
-    private Button btn_start_exam;
+    private Button btn_start_exam,btn_instructions;
     private TextView tv_exam_name,tv_subject,tv_date,tv_start_time,tv_end_time,tv_exam_type;
         public ExamsListHolder(@NonNull View itemView) {
             super(itemView);
@@ -65,6 +73,7 @@ public class ExamsListAdapter extends RecyclerView.Adapter<ExamsListAdapter.Exam
             tv_start_time=itemView.findViewById(R.id.tv_start_time);
             tv_end_time=itemView.findViewById(R.id.tv_end_time);
             tv_exam_type=itemView.findViewById(R.id.tv_exam_type);
+            btn_instructions=itemView.findViewById(R.id.btn_instructions);
             }
     }
 }

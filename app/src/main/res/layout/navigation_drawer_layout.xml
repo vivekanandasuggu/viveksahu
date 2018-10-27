@@ -27,7 +27,7 @@
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="20dp"
                     android:src="@drawable/logoi"
-                    android:background="#f05" />
+                    android:scaleType="fitXY"/>
 
                 <TextView
                     android:id="@+id/tv_rider_name"
@@ -43,8 +43,6 @@
                     android:textColor="@color/white"
                     android:textSize="24dp"
                     android:textStyle="bold" />
-
-
             </RelativeLayout>
 
             <RelativeLayout
@@ -57,7 +55,6 @@
                     android:id="@+id/menu_items_list"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
-
                 </android.support.v7.widget.RecyclerView>
             </RelativeLayout>
         </RelativeLayout>
@@ -71,6 +68,7 @@
         android:layout_marginBottom="10dp"
         android:layout_marginLeft="18dp"
         android:text="about us"
+        android:visibility="invisible"
         android:layout_marginTop="5dp"
         android:textColor="@color/white" />
 
@@ -83,5 +81,6 @@
         android:paddingLeft="18dp"
         android:paddingRight="18dp"
         android:text="Logout"
+        android:visibility="invisible"
         android:textColor="@color/white" />
 </RelativeLayout>

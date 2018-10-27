@@ -12,13 +12,23 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import com.educare.electus.Dialogues.InstructionsDialog;
 import com.educare.electus.R;
+import com.educare.electus.model.MenuItem;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class DashBoardActivity extends AppCompatActivity implements View.OnClickListener {
     private ImageView menu_icon;
     private DrawerLayout drawer;
     private RecyclerView menu_items_list;
+    private List<MenuItem> images = new ArrayList<>();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +40,40 @@ public class DashBoardActivity extends AppCompatActivity implements View.OnClick
         menu_items_list = (RecyclerView) findViewById(R.id.menu_items_list);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         menu_items_list.setLayoutManager(linearLayoutManager);
+
+        //adding the menu items
+        MenuItem item = new MenuItem();
+        item.setImage(R.drawable.desktop);
+        item.setMenu("Home");
+        images.add(item);
+
+        item = new MenuItem();
+        item.setImage(R.drawable.desktop);
+        item.setMenu("Exam List");
+        images.add(item);
+
+        item = new MenuItem();
+        item.setImage(R.drawable.desktop);
+        item.setMenu("Results");
+        images.add(item);
+
+        item = new MenuItem();
+        item.setImage(R.drawable.desktop);
+        item.setMenu("Analysis");
+        images.add(item);
+
+      /*  item = new MenuItem();
+        item.setImage(R.drawable.desktop);
+        item.setMenugetString(R.string.promotions_menulabel));
+        images.add(item);
+
+        item = new MenuItem();
+        item.setImage(R.drawable.desktop);
+        item.setMenu(getString(R.string.drivewithspin_menulabel));
+        images.add(item);*/
+      MenuListAdapter menuListAdapter=new MenuListAdapter(this,images);
+      menu_items_list.setAdapter(menuListAdapter);
+
     }
 
     @Override
@@ -41,8 +85,10 @@ public class DashBoardActivity extends AppCompatActivity implements View.OnClick
 
     class MenuListAdapter extends RecyclerView.Adapter<MenuListAdapter.MenuHolder>{
         private Context context;
-        public MenuListAdapter(Context context){
+        private List<MenuItem> menuItems;
+        public MenuListAdapter(Context context,List<MenuItem> menuItems){
             this.context=context;
+            this.menuItems=menuItems;
 
         }
         @NonNull
@@ -54,19 +100,32 @@ public class DashBoardActivity extends AppCompatActivity implements View.OnClick
         }
 
         @Override
-        public void onBindViewHolder(@NonNull MenuHolder menuHolder, int i) {
-
+        public void onBindViewHolder(@NonNull MenuHolder menuHolder, final int position) {
+         menuHolder.txt_menu_item.setText(menuItems.get(position).getMenu());
+         menuHolder.list_item.setOnClickListener(new View.OnClickListener() {
+             @Override
+             public void onClick(View v) {
+                 drawer.closeDrawer(Gravity.LEFT);
+                 Toast.makeText(DashBoardActivity.this,"Clicked on "+position,Toast.LENGTH_SHORT).show();
+                 new InstructionsDialog(DashBoardActivity.this,"show message");
+             }
+         });
         }
 
         @Override
         public int getItemCount() {
-            return 0;
+            return menuItems.size();
         }
 
         class MenuHolder extends RecyclerView.ViewHolder{
-
+             private RelativeLayout list_item;
+             private ImageView img_menu_icons;
+             private TextView txt_menu_item;
             public MenuHolder(@NonNull View itemView) {
                 super(itemView);
+                img_menu_icons=itemView.findViewById(R.id.img_menu_icons);
+                txt_menu_item=itemView.findViewById(R.id.txt_menu_item);
+                list_item=itemView.findViewById(R.id.list_item);
             }
         }
     }
