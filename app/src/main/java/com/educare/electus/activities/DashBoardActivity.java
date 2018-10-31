@@ -2,6 +2,9 @@ package com.educare.electus.activities;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -18,6 +21,9 @@ import android.widget.Toast;
 
 import com.educare.electus.Dialogues.InstructionsDialog;
 import com.educare.electus.R;
+import com.educare.electus.fragments.DashBoardFragment;
+import com.educare.electus.fragments.ExamsListFragment;
+import com.educare.electus.fragments.ResultsFragment;
 import com.educare.electus.model.MenuItem;
 
 import java.util.ArrayList;
@@ -44,33 +50,42 @@ public class DashBoardActivity extends AppCompatActivity implements View.OnClick
         //adding the menu items
         MenuItem item = new MenuItem();
         item.setImage(R.drawable.desktop);
-        item.setMenu("Home");
+        item.setMenu("DASHBOARD");
         images.add(item);
 
         item = new MenuItem();
         item.setImage(R.drawable.desktop);
-        item.setMenu("Exam List");
+        item.setMenu("START TEST");
         images.add(item);
 
         item = new MenuItem();
         item.setImage(R.drawable.desktop);
-        item.setMenu("Results");
+        item.setMenu("RESULTS");
         images.add(item);
 
         item = new MenuItem();
         item.setImage(R.drawable.desktop);
-        item.setMenu("Analysis");
+        item.setMenu("BOOKMARK QUESTIONS");
         images.add(item);
-
-      /*  item = new MenuItem();
+        item = new MenuItem();
         item.setImage(R.drawable.desktop);
-        item.setMenugetString(R.string.promotions_menulabel));
+        item.setMenu("SPA");
         images.add(item);
 
         item = new MenuItem();
         item.setImage(R.drawable.desktop);
-        item.setMenu(getString(R.string.drivewithspin_menulabel));
-        images.add(item);*/
+        item.setMenu("RANK");
+        images.add(item);
+
+        item = new MenuItem();
+        item.setImage(R.drawable.desktop);
+        item.setMenu("PROFILE");
+        images.add(item);
+
+        item = new MenuItem();
+        item.setImage(R.drawable.desktop);
+        item.setMenu("LOGOUT");
+        images.add(item);
       MenuListAdapter menuListAdapter=new MenuListAdapter(this,images);
       menu_items_list.setAdapter(menuListAdapter);
 
@@ -81,6 +96,14 @@ public class DashBoardActivity extends AppCompatActivity implements View.OnClick
         if(v==menu_icon){
             drawer.openDrawer(Gravity.LEFT);
         }
+    }
+
+    private void openParticularFragment(int textsize, String headerText, Fragment fragment) {
+        //progress_relative.setVisibility(View.GONE);
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.home_frame, fragment);
+        fragmentTransaction.commit();
     }
 
     class MenuListAdapter extends RecyclerView.Adapter<MenuListAdapter.MenuHolder>{
@@ -107,7 +130,18 @@ public class DashBoardActivity extends AppCompatActivity implements View.OnClick
              public void onClick(View v) {
                  drawer.closeDrawer(Gravity.LEFT);
                  Toast.makeText(DashBoardActivity.this,"Clicked on "+position,Toast.LENGTH_SHORT).show();
-                 new InstructionsDialog(DashBoardActivity.this,"show message");
+             //    new InstructionsDialog(DashBoardActivity.this,"show message");
+                 switch (position){
+                     case 0:
+                         openParticularFragment(20, getString(R.string.appname), new DashBoardFragment());
+                         break;
+                     case 1:
+                         openParticularFragment(20, getString(R.string.appname), new ExamsListFragment());
+                         break;
+                     case 2:
+                         openParticularFragment(20, getString(R.string.appname), new ResultsFragment());
+                         break;
+                 }
              }
          });
         }

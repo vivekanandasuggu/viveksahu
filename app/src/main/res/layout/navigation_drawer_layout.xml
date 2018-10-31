@@ -2,6 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
     android:background="@color/colorPrimary">
 
     <android.support.v4.widget.NestedScrollView
@@ -54,7 +55,8 @@
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/menu_items_list"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    tools:listitem="@layout/list_item_menu_options">
                 </android.support.v7.widget.RecyclerView>
             </RelativeLayout>
         </RelativeLayout>
@@ -68,10 +70,9 @@
         android:layout_marginBottom="10dp"
         android:layout_marginLeft="18dp"
         android:text="about us"
-        android:visibility="invisible"
+        android:visibility="gone"
         android:layout_marginTop="5dp"
         android:textColor="@color/white" />
-
     <TextView
         android:id="@+id/tv_logout"
         android:layout_width="wrap_content"
@@ -81,6 +82,6 @@
         android:paddingLeft="18dp"
         android:paddingRight="18dp"
         android:text="Logout"
-        android:visibility="invisible"
-        android:textColor="@color/white" />
+        android:visibility="gone"
+        android:textColor="@color/white"/>
 </RelativeLayout>

@@ -28,7 +28,6 @@ public class InstructionsDialog {
         dialog.setCancelable(true);
         dialog.setContentView(R.layout.dialog_instructions_layout);
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-
         TextView text = (TextView) dialog.findViewById(R.id.text_dialog);
         text.setText(msg);
 

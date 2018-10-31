@@ -37,4 +37,5 @@
     <string name="instructions">instructions</string>
     <string name="testing_exam">TESTING EXAM</string>
     <string name="maths_physics_chemistry">Maths,physics,chemistry</string>
+    <string name="bulletpoint">●</string>
 </resources>
